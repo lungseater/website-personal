@@ -1,0 +1,1615 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OneKlik - Solusi Professional Checkout & Jastip Barang Luar Negeri</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --pastel-pink: #ffd6e7;
+            --pastel-blue: #d6f0ff;
+            --pastel-green: #d6ffdf;
+            --pastel-yellow: #fff9d6;
+            --pastel-purple: #ecd6ff;
+            --pastel-peach: #ffded6;
+            
+            --primary-dark: #2d2a6e;
+            --primary: #4a47b4;
+            --primary-light: #7b78e0;
+            --accent: #ff6b9d;
+            --accent-light: #ff9ec0;
+            
+            --text-dark: #1a1a2e;
+            --text: #2d2d44;
+            --text-light: #5a5a7a;
+            --text-lighter: #8a8aaf;
+            
+            --white: #ffffff;
+            --off-white: #f9f9ff;
+            --gray-light: #e6e6f0;
+            
+            --shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            --shadow-hover: 0 10px 25px rgba(0, 0, 0, 0.1);
+            --shadow-strong: 0 15px 30px rgba(0, 0, 0, 0.15);
+            
+            --border-radius: 12px;
+            --border-radius-lg: 20px;
+            --border-radius-full: 50px;
+            
+            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: var(--text);
+            line-height: 1.6;
+            background-color: var(--off-white);
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                linear-gradient(var(--pastel-blue) 1px, transparent 1px),
+                linear-gradient(90deg, var(--pastel-blue) 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: center center;
+            opacity: 0.15;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header Profesional */
+        header {
+            padding: 18px 0;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.08);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            transition: var(--transition);
+        }
+
+        .logo:hover {
+            transform: translateY(-2px);
+        }
+
+        .logo-circle {
+            width: 48px;
+            height: 48px;
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-purple));
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 900;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .logo-circle:hover {
+            transform: rotate(-5deg) scale(1.05);
+        }
+
+        .logo-text {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .logo-text h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 1.8rem;
+            color: var(--primary-dark);
+            line-height: 1;
+            letter-spacing: -0.5px;
+        }
+
+        .logo-text span {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+
+        .main-nav {
+            display: flex;
+            align-items: center;
+            gap: 40px;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 32px;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 600;
+            font-size: 0.95rem;
+            position: relative;
+            padding: 5px 0;
+            transition: var(--transition);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+            transition: width 0.3s ease;
+            border-radius: 2px;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .header-cta {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .cta-button {
+            background: linear-gradient(135deg, var(--primary), var(--primary-light));
+            color: white;
+            padding: 12px 28px;
+            border-radius: var(--border-radius-full);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.95rem;
+            transition: var(--transition);
+            box-shadow: 0 5px 15px rgba(74, 71, 180, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(74, 71, 180, 0.4);
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: var(--primary);
+            cursor: pointer;
+            padding: 8px;
+            border-radius: 8px;
+            transition: var(--transition);
+        }
+
+        .mobile-menu-btn:hover {
+            background-color: var(--pastel-blue);
+        }
+
+        /* Hero Section Profesional */
+        .hero {
+            padding: 160px 0 100px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(214, 240, 255, 0.3) 100%);
+            z-index: -1;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+            position: relative;
+        }
+
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--pastel-yellow), var(--pastel-peach));
+            padding: 12px 24px;
+            border-radius: var(--border-radius-full);
+            font-weight: 600;
+            color: var(--text);
+            box-shadow: var(--shadow);
+            margin-bottom: 30px;
+            transition: var(--transition);
+        }
+
+        .hero-badge:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .hero-badge i {
+            color: var(--accent);
+            font-size: 1.1rem;
+        }
+
+        .hero-title {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            font-size: 3.5rem;
+            line-height: 1.1;
+            margin-bottom: 24px;
+            color: var(--primary-dark);
+            letter-spacing: -0.5px;
+        }
+
+        .hero-title .highlight {
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-subtitle {
+            font-size: 1.25rem;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+            line-height: 1.6;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            margin-bottom: 60px;
+        }
+
+        .primary-cta {
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            padding: 18px 40px;
+            border-radius: var(--border-radius-full);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            box-shadow: 0 8px 25px rgba(255, 107, 157, 0.4);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .primary-cta:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 107, 157, 0.5);
+            background: linear-gradient(135deg, var(--accent), #ff4d8d);
+        }
+
+        .secondary-cta {
+            background: transparent;
+            color: var(--primary);
+            padding: 18px 40px;
+            border-radius: var(--border-radius-full);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.1rem;
+            transition: var(--transition);
+            border: 2px solid var(--primary-light);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .secondary-cta:hover {
+            background: rgba(74, 71, 180, 0.05);
+            transform: translateY(-3px);
+            border-color: var(--primary);
+        }
+
+        /* Marquee Platforms */
+        .platforms-marquee {
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.9), rgba(214, 240, 255, 0.7));
+            padding: 20px 0;
+            border-radius: var(--border-radius-lg);
+            overflow: hidden;
+            position: relative;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.8);
+        }
+
+        .marquee-container {
+            display: flex;
+            animation: marquee 30s linear infinite;
+            padding-left: 100%;
+        }
+
+        .platform-item {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            padding: 0 40px;
+            white-space: nowrap;
+        }
+
+        .platform-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+        }
+
+        .platform-item:nth-child(1) .platform-icon { background: linear-gradient(135deg, #FF4000, #FF6B3D); }
+        .platform-item:nth-child(2) .platform-icon { background: linear-gradient(135deg, #00C4CC, #00E5FF); }
+        .platform-item:nth-child(3) .platform-icon { background: linear-gradient(135deg, #FF3B30, #FF6B60); }
+        .platform-item:nth-child(4) .platform-icon { background: linear-gradient(135deg, #1DDB16, #4CFF45); }
+        .platform-item:nth-child(5) .platform-icon { background: linear-gradient(135deg, #FF9500, #FFB143); }
+        .platform-item:nth-child(6) .platform-icon { background: linear-gradient(135deg, #5856D6, #7876FF); }
+
+        .platform-name {
+            font-weight: 700;
+            font-size: 1.1rem;
+            color: var(--primary-dark);
+        }
+
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-100%); }
+        }
+
+        /* Features Section */
+        .features {
+            padding: 100px 0;
+            background-color: var(--white);
+            position: relative;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 60px;
+        }
+
+        .section-header h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+            margin-bottom: 16px;
+            letter-spacing: -0.5px;
+        }
+
+        .section-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-light);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .feature-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 40px 30px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: linear-gradient(90deg, var(--accent), var(--primary));
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-strong);
+        }
+
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            border-radius: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 25px;
+            font-size: 1.8rem;
+            color: white;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card:nth-child(1) .feature-icon {
+            background: linear-gradient(135deg, var(--pastel-blue), var(--primary-light));
+        }
+
+        .feature-card:nth-child(2) .feature-icon {
+            background: linear-gradient(135deg, var(--pastel-pink), var(--accent));
+        }
+
+        .feature-card:nth-child(3) .feature-icon {
+            background: linear-gradient(135deg, var(--pastel-green), #4CAF50);
+        }
+
+        .feature-card h3 {
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .feature-card p {
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.7;
+        }
+
+        .feature-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .feature-link:hover {
+            color: var(--primary-dark);
+            gap: 12px;
+        }
+
+        /* Stats Section */
+        .stats {
+            padding: 80px 0;
+            background: linear-gradient(135deg, var(--pastel-blue), var(--pastel-purple));
+            position: relative;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 30px;
+        }
+
+        .stat-card {
+            text-align: center;
+            padding: 30px;
+            background: rgba(255, 255, 255, 0.9);
+            border-radius: var(--border-radius-lg);
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+            background: var(--white);
+        }
+
+        .stat-number {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            color: var(--primary);
+            margin-bottom: 10px;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--text);
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 100px 0;
+            background-color: var(--off-white);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            margin-top: 60px;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 10%;
+            right: 10%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--pastel-pink), var(--pastel-blue));
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            flex: 1;
+            padding: 0 20px;
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--accent), var(--primary));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 25px;
+            color: white;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            font-weight: 900;
+            box-shadow: 0 10px 20px rgba(255, 107, 157, 0.3);
+            transition: var(--transition);
+        }
+
+        .step:hover .step-number {
+            transform: scale(1.1) rotate(5deg);
+        }
+
+        .step h3 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+
+        .step p {
+            color: var(--text-light);
+            line-height: 1.7;
+        }
+
+        /* Testimonials */
+        .testimonials {
+            padding: 100px 0;
+            background-color: var(--white);
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+        }
+
+        .testimonial-card {
+            background: var(--white);
+            border-radius: var(--border-radius-lg);
+            padding: 35px;
+            box-shadow: var(--shadow);
+            transition: var(--transition);
+            border: 1px solid rgba(255, 255, 255, 0.9);
+            position: relative;
+        }
+
+        .testimonial-card::before {
+            content: '"';
+            position: absolute;
+            top: 20px;
+            right: 25px;
+            font-size: 4rem;
+            color: var(--pastel-blue);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 900;
+            opacity: 0.3;
+        }
+
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-hover);
+        }
+
+        .member-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .member-avatar {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-blue));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 1.5rem;
+            color: var(--primary-dark);
+            flex-shrink: 0;
+        }
+
+        .member-details h4 {
+            color: var(--primary-dark);
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .member-details p {
+            color: var(--text-light);
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .testimonial-text {
+            color: var(--text);
+            font-style: italic;
+            line-height: 1.7;
+            margin-bottom: 20px;
+        }
+
+        .rating {
+            color: #FFC107;
+            font-size: 1.1rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            padding: 120px 0;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            color: white;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .cta-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 1000"><path fill="%23ffffff" fill-opacity="0.03" d="M0,0L1000,0L1000,1000L0,1000Z"/><circle cx="200" cy="200" r="100" fill="%23ffffff" fill-opacity="0.05"/><circle cx="800" cy="800" r="150" fill="%23ffffff" fill-opacity="0.05"/><circle cx="500" cy="300" r="80" fill="%23ffffff" fill-opacity="0.05"/></svg>');
+            background-size: cover;
+        }
+
+        .cta-content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .cta-content h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 3rem;
+            font-weight: 900;
+            margin-bottom: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .cta-content p {
+            font-size: 1.2rem;
+            margin-bottom: 40px;
+            opacity: 0.9;
+            line-height: 1.6;
+        }
+
+        .cta-button-large {
+            display: inline-flex;
+            align-items: center;
+            gap: 15px;
+            background: linear-gradient(135deg, var(--accent), var(--accent-light));
+            color: white;
+            padding: 22px 50px;
+            border-radius: var(--border-radius-full);
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 1.2rem;
+            transition: var(--transition);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .cta-button-large:hover {
+            transform: translateY(-5px) scale(1.05);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--primary-dark);
+            color: white;
+            padding: 80px 0 30px;
+            position: relative;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-bottom: 50px;
+        }
+
+        .footer-brand {
+            max-width: 300px;
+        }
+
+        .footer-logo {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .footer-logo .logo-circle {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--pastel-pink), var(--pastel-blue));
+        }
+
+        .footer-logo h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 2rem;
+            color: white;
+            line-height: 1;
+        }
+
+        .footer-tagline {
+            color: rgba(255, 255, 255, 0.8);
+            margin-bottom: 25px;
+            line-height: 1.7;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 15px;
+        }
+
+        .social-links a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 42px;
+            height: 42px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            text-decoration: none;
+            transition: var(--transition);
+        }
+
+        .social-links a:hover {
+            background-color: var(--accent);
+            transform: translateY(-3px);
+        }
+
+        .footer-links {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 40px;
+        }
+
+        .link-group h3 {
+            color: white;
+            font-size: 1.2rem;
+            margin-bottom: 25px;
+            position: relative;
+            padding-bottom: 12px;
+        }
+
+        .link-group h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 3px;
+            background: var(--accent);
+            border-radius: 2px;
+        }
+
+        .link-group ul {
+            list-style: none;
+        }
+
+        .link-group li {
+            margin-bottom: 14px;
+        }
+
+        .link-group a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: var(--transition);
+            font-size: 0.95rem;
+        }
+
+        .link-group a:hover {
+            color: white;
+            padding-left: 5px;
+        }
+
+        .footer-bottom {
+            padding-top: 30px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            text-align: center;
+            color: rgba(255, 255, 255, 0.6);
+            font-size: 0.9rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .copyright {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .copyright i {
+            color: var(--accent);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .features-grid,
+            .testimonials-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .steps {
+                flex-direction: column;
+                gap: 50px;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                gap: 40px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .main-nav {
+                display: none;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--white);
+                padding: 20px;
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+                border-radius: 0 0 var(--border-radius-lg) var(--border-radius-lg);
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+            
+            .main-nav.active {
+                display: flex;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 15px;
+                width: 100%;
+            }
+            
+            .nav-links a {
+                padding: 10px 0;
+                display: block;
+                width: 100%;
+                border-bottom: 1px solid var(--gray-light);
+            }
+            
+            .nav-links a:last-child {
+                border-bottom: none;
+            }
+            
+            .header-cta {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-cta {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .features-grid,
+            .testimonials-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .footer-links {
+                grid-template-columns: 1fr;
+                gap: 30px;
+            }
+            
+            .footer-bottom {
+                flex-direction: column;
+                gap: 20px;
+                text-align: center;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+            
+            .primary-cta,
+            .secondary-cta {
+                padding: 15px 25px;
+                font-size: 1rem;
+            }
+            
+            .section-header h2 {
+                font-size: 2rem;
+            }
+            
+            .feature-card,
+            .testimonial-card,
+            .stat-card {
+                padding: 25px;
+            }
+            
+            .cta-content h2 {
+                font-size: 2.2rem;
+            }
+            
+            .cta-button-large {
+                padding: 18px 30px;
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo">
+                <div class="logo-circle">
+                    <span>OK</span>
+                </div>
+                <div class="logo-text">
+                    <h1>OneKlik</h1>
+                    <span>INTERNATIONAL SHOPPING</span>
+                </div>
+            </a>
+            
+            <nav class="main-nav">
+                <ul class="nav-links">
+                    <li><a href="#about">ABOUT</a></li>
+                    <li><a href="#services">SERVICES</a></li>
+                    <li><a href="#platforms">PLATFORMS</a></li>
+                    <li><a href="#how-it-works">HOW IT WORKS</a></li>
+                    <li><a href="#testimonials">TESTIMONIALS</a></li>
+                    <li><a href="#contact">CONTACT</a></li>
+                </ul>
+                
+                <div class="header-cta">
+                    <a href="#join" class="cta-button">
+                        <i class="fas fa-user-plus"></i>
+                        Join The Club
+                    </a>
+                </div>
+            </nav>
+            
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <i class="fas fa-globe-asia"></i>
+                    <span>THE COMMUNITY FOR INTERNATIONAL SHOPPERS</span>
+                </div>
+                
+                <h1 class="hero-title">
+                    Solusi Professional
+                    <span class="highlight">Checkout & Jastip</span>
+                    Barang Luar Negeri
+                </h1>
+                
+                <p class="hero-subtitle">
+                    For The Overwhelmed, The Strategy-Confused And The International Shopping Obsessed.
+                    Helping shoppers simplify their journey, celebrate the wins and reach their full potential.
+                </p>
+                
+                <div class="hero-cta">
+                    <a href="#get-started" class="primary-cta">
+                        <i class="fas fa-rocket"></i>
+                        Mulai Belanja Sekarang
+                    </a>
+                    <a href="#learn-more" class="secondary-cta">
+                        <i class="fas fa-play-circle"></i>
+                        Lihat Demo
+                    </a>
+                </div>
+                
+                <!-- Platforms Marquee -->
+                <div class="platforms-marquee">
+                    <div class="marquee-container">
+                        <div class="platform-item">
+                            <div class="platform-icon">
+                                <i class="fas fa-shopping-cart"></i>
+                            </div>
+                            <span class="platform-name">Taobao</span>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon">
+                                <i class="fas fa-recycle"></i>
+                            </div>
+                            <span class="platform-name">Xianyu</span>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon">
+                                <i class="fas fa-tag"></i>
+                            </div>
+                            <span class="platform-name">Mercari JP</span>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon">
+                                <i class="fas fa-tshirt"></i>
+                            </div>
+                            <span class="platform-name">Bunjang Korea</span>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon">
+                                <i class="fab fa-shopify"></i>
+                            </div>
+                            <span class="platform-name">Shopee Taiwan</span>
+                        </div>
+                        <div class="platform-item">
+                            <div class="platform-icon">
+                                <i class="fas fa-gem"></i>
+                            </div>
+                            <span class="platform-name">eBay Global</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section id="services" class="features">
+        <div class="container">
+            <div class="section-header">
+                <h2>Layanan Professional OneKlik</h2>
+                <p class="section-subtitle">Kami menyediakan solusi lengkap untuk semua kebutuhan belanja internasional Anda</p>
+            </div>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <h3>Checkout Service</h3>
+                    <p>Kami melakukan pembelian langsung dari platform luar negeri. Cukup berikan link produk, kami handle semua proses pembayaran dan komunikasi dengan seller.</p>
+                    <a href="#" class="feature-link">
+                        Pelajari Lebih Lanjut
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-search"></i>
+                    </div>
+                    <h3>Product Sourcing</h3>
+                    <p>Cari barang spesifik? Tim kami akan mencarikan produk terbaik sesuai kebutuhan Anda di berbagai platform dengan harga kompetitif.</p>
+                    <a href="#" class="feature-link">
+                        Mulai Pencarian
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-shipping-fast"></i>
+                    </div>
+                    <h3>Logistics Management</h3>
+                    <p>Kami manage semua proses logistik mulai dari pengambilan barang, konsolidasi, packing aman, hingga pengiriman ke alamat Anda.</p>
+                    <a href="#" class="feature-link">
+                        Track Pengiriman
+                        <i class="fas fa-arrow-right"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Stats Section -->
+    <section class="stats">
+        <div class="container">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number">10,000+</div>
+                    <div class="stat-label">Transaksi Sukses</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">15+</div>
+                    <div class="stat-label">Platform Internasional</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">98.5%</div>
+                    <div class="stat-label">Kepuasan Pelanggan</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">24/7</div>
+                    <div class="stat-label">Customer Support</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works -->
+    <section id="how-it-works" class="how-it-works">
+        <div class="container">
+            <div class="section-header">
+                <h2>Bagaimana Cara Kerjanya?</h2>
+                <p class="section-subtitle">Hanya dengan 4 langkah mudah, barang impian Anda bisa sampai di tangan</p>
+            </div>
+            
+            <div class="steps">
+                <div class="step">
+                    <div class="step-number">1</div>
+                    <h3>Submit Order</h3>
+                    <p>Kirimkan link produk atau deskripsi barang yang Anda cari melalui platform kami</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">2</div>
+                    <h3>Konfirmasi & Bayar</h3>
+                    <p>Kami berikan detail biaya untuk disetujui, kemudian lakukan pembayaran aman</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">3</div>
+                    <h3>Kami Proses</h3>
+                    <p>Tim kami melakukan pembelian, pantau pengiriman, dan konsolidasi barang</p>
+                </div>
+                
+                <div class="step">
+                    <div class="step-number">4</div>
+                    <h3>Terima Barang</h3>
+                    <p>Barang tiba di Indonesia dan dikirim ke alamat Anda dengan packing premium</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section id="testimonials" class="testimonials">
+        <div class="container">
+            <div class="section-header">
+                <h2>Apa Kata Klien Kami</h2>
+                <p class="section-subtitle">Bergabung dengan ribuan pelanggan yang telah mempercayai layanan kami</p>
+            </div>
+            
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="member-info">
+                        <div class="member-avatar">
+                            <span>AS</span>
+                        </div>
+                        <div class="member-details">
+                            <h4>Andi Susanto</h4>
+                            <p>Business Owner | Jakarta</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Sebagai pemilik bisnis fashion, OneKlik telah menjadi partner terpercaya untuk sourcing produk dari China. Professional dan selalu tepat waktu."
+                    </p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="member-info">
+                        <div class="member-avatar">
+                            <span>RD</span>
+                        </div>
+                        <div class="member-details">
+                            <h4>Rina Dewi</h4>
+                            <p>K-Beauty Enthusiast | Bandung</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Belanja skincare Korea jadi lebih mudah dengan OneKlik. Barang original, harga kompetitif, dan pengiriman cepat. Highly recommended!"
+                    </p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <div class="member-info">
+                        <div class="member-avatar">
+                            <span>BS</span>
+                        </div>
+                        <div class="member-details">
+                            <h4>Budi Santoso</h4>
+                            <p>Collector | Surabaya</p>
+                        </div>
+                    </div>
+                    <p class="testimonial-text">
+                        "Koleksi figure Jepang saya bertambah berkat OneKlik. Mereka bisa mendapatkan barang langka di Mercari yang tidak bisa saya akses sendiri."
+                    </p>
+                    <div class="rating">
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star"></i>
+                        <i class="fas fa-star-half-alt"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <div class="cta-content">
+                <h2>Siap Mulai Belanja Internasional?</h2>
+                <p>
+                    Bergabunglah dengan komunitas OneKlik dan rasakan kemudahan belanja dari platform internasional favorit Anda. 
+                    Dapatkan akses ke produk eksklusif, harga terbaik, dan layanan professional.
+                </p>
+                <a href="#join-now" class="cta-button-large">
+                    <i class="fas fa-door-open"></i>
+                    Join The Community - Doors Open Now
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-brand">
+                    <div class="footer-logo">
+                        <div class="logo-circle">
+                            <span>OK</span>
+                        </div>
+                        <h2>OneKlik</h2>
+                    </div>
+                    <p class="footer-tagline">
+                        Solusi professional checkout dan jastip barang luar negeri. 
+                        Membantu Anda mengakses pasar global dengan mudah, aman, dan terpercaya.
+                    </p>
+                    
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                        <a href="#"><i class="fab fa-telegram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-links">
+                    <div class="link-group">
+                        <h3>Layanan</h3>
+                        <ul>
+                            <li><a href="#">Checkout Service</a></li>
+                            <li><a href="#">Jastip Service</a></li>
+                            <li><a href="#">Product Sourcing</a></li>
+                            <li><a href="#">Logistics</a></li>
+                            <li><a href="#">Quality Control</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Platform</h3>
+                        <ul>
+                            <li><a href="#">Taobao & Tmall</a></li>
+                            <li><a href="#">Xianyu</a></li>
+                            <li><a href="#">Mercari Japan</a></li>
+                            <li><a href="#">Bunjang Korea</a></li>
+                            <li><a href="#">Shopee Taiwan</a></li>
+                        </ul>
+                    </div>
+                    
+                    <div class="link-group">
+                        <h3>Perusahaan</h3>
+                        <ul>
+                            <li><a href="#">Tentang Kami</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li><a href="#">Karir</a></li>
+                            <li><a href="#">Kontak</a></li>
+                            <li><a href="#">FAQ</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <div class="copyright">
+                    <i class="far fa-copyright"></i>
+                    <span>2023 OneKlik International Shopping. All rights reserved.</span>
+                </div>
+                <div>
+                    <span>Professional Solutions for Global Shoppers</span>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile Menu Toggle
+        document.addEventListener('DOMContentLoaded', function() {
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            const mainNav = document.querySelector('.main-nav');
+            
+            mobileMenuBtn.addEventListener('click', function() {
+                mainNav.classList.toggle('active');
+                this.innerHTML = mainNav.classList.contains('active') 
+                    ? '<i class="fas fa-times"></i>' 
+                    : '<i class="fas fa-bars"></i>';
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(event) {
+                if (!mainNav.contains(event.target) && !mobileMenuBtn.contains(event.target)) {
+                    mainNav.classList.remove('active');
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            });
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function(e) {
+                    const href = this.getAttribute('href');
+                    
+                    if (href === '#') return;
+                    
+                    e.preventDefault();
+                    
+                    const targetElement = document.querySelector(href);
+                    if (targetElement) {
+                        // Close mobile menu if open
+                        if (window.innerWidth <= 768) {
+                            mainNav.classList.remove('active');
+                            mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                        }
+                        
+                        window.scrollTo({
+                            top: targetElement.offsetTop - 80,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+            
+            // Add scroll effect to header
+            window.addEventListener('scroll', function() {
+                const header = document.querySelector('header');
+                if (window.scrollY > 100) {
+                    header.style.boxShadow = '0 5px 20px rgba(0, 0, 0, 0.1)';
+                    header.style.backdropFilter = 'blur(15px)';
+                } else {
+                    header.style.boxShadow = '0 2px 20px rgba(0, 0, 0, 0.08)';
+                    header.style.backdropFilter = 'blur(10px)';
+                }
+            });
+            
+            // Animate stats counter
+            const statNumbers = document.querySelectorAll('.stat-number');
+            const observerOptions = {
+                threshold: 0.5,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const statNumber = entry.target;
+                        const targetValue = parseInt(statNumber.textContent);
+                        let currentValue = 0;
+                        const increment = targetValue / 50;
+                        const duration = 1500;
+                        const stepTime = duration / 50;
+                        
+                        const timer = setInterval(() => {
+                            currentValue += increment;
+                            if (currentValue >= targetValue) {
+                                statNumber.textContent = targetValue + (statNumber.textContent.includes('+') ? '+' : '');
+                                clearInterval(timer);
+                            } else {
+                                statNumber.textContent = Math.floor(currentValue) + (statNumber.textContent.includes('+') ? '+' : '');
+                            }
+                        }, stepTime);
+                        
+                        observer.unobserve(statNumber);
+                    }
+                });
+            }, observerOptions);
+            
+            statNumbers.forEach(stat => observer.observe(stat));
+            
+            // Animate feature cards on scroll
+            const featureCards = document.querySelectorAll('.feature-card');
+            const cardObserver = new IntersectionObserver(function(entries) {
+                entries.forEach((entry, index) => {
+                    if (entry.isIntersecting) {
+                        setTimeout(() => {
+                            entry.target.style.opacity = '1';
+                            entry.target.style.transform = 'translateY(0)';
+                        }, index * 150);
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            featureCards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+                cardObserver.observe(card);
+            });
+            
+            // Update copyright year
+            const yearSpan = document.querySelector('.copyright span');
+            if (yearSpan) {
+                const currentYear = new Date().getFullYear();
+                yearSpan.textContent = yearSpan.textContent.replace('2023', currentYear);
+            }
+            
+            // Add hover effect to platform items
+            const platformItems = document.querySelectorAll('.platform-item');
+            platformItems.forEach(item => {
+                item.addEventListener('mouseenter', function() {
+                    const icon = this.querySelector('.platform-icon');
+                    icon.style.transform = 'rotate(15deg) scale(1.1)';
+                    icon.style.transition = 'transform 0.3s ease';
+                });
+                
+                item.addEventListener('mouseleave', function() {
+                    const icon = this.querySelector('.platform-icon');
+                    icon.style.transform = 'rotate(0) scale(1)';
+                });
+            });
+            
+            // Marquee animation reset
+            const marqueeContainer = document.querySelector('.marquee-container');
+            if (marqueeContainer) {
+                // Clone content for seamless looping
+                const originalContent = marqueeContainer.innerHTML;
+                marqueeContainer.innerHTML += originalContent;
+                
+                // Reset animation periodically
+                setInterval(() => {
+                    marqueeContainer.style.animation = 'none';
+                    setTimeout(() => {
+                        marqueeContainer.style.animation = 'marquee 30s linear infinite';
+                    }, 10);
+                }, 30000);
+            }
+        });
+        
+        // Handle window resize
+        window.addEventListener('resize', function() {
+            const mainNav = document.querySelector('.main-nav');
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+            
+            if (window.innerWidth > 768) {
+                mainNav.classList.remove('active');
+                if (mobileMenuBtn) {
+                    mobileMenuBtn.innerHTML = '<i class="fas fa-bars"></i>';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
